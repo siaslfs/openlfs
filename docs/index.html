@@ -392,7 +392,8 @@ table.t tr.bad td{background:var(--red-soft)}
 .cp-warn code{font-family:var(--mono);font-size:11.5px}
 .cp-warn .btn{flex:none}
 .cp-f{display:flex;gap:8px;align-items:center;border-top:1px solid var(--line);padding:8px 14px;font-size:12px;color:var(--muted)}
-.cp-f .linkbtn{padding:0;font-size:12px;margin-left:auto}
+.cp-f .linkbtn{padding:0;font-size:12px}
+.cp-f .linkbtn+.linkbtn{margin-left:auto}
 .chip .wdot{width:6px;height:6px;border-radius:50%;background:var(--amber)}
 .foot-meta{max-width:760px;margin:8px auto 0;display:flex;gap:14px;align-items:center;font-size:12px;color:var(--muted);flex-wrap:wrap}
 .foot-meta .track{width:90px;height:6px}
@@ -488,6 +489,38 @@ input.txt{border:1px solid var(--line2);background:var(--panel);border-radius:8p
 .modal-h h3{margin:0;font-size:17px}
 .modal-b{padding:18px 22px;display:flex;flex-direction:column;gap:14px;overflow:auto}
 .modal-f{display:flex;gap:8px;padding:14px 22px;border-top:1px solid var(--line);justify-content:flex-end}
+.modal.wide{width:min(760px,100%)}
+.modal.wide.tall{height:min(640px,calc(100vh - 32px))}
+.modal.wide .modal-b{flex:1}
+.cat-tabs{display:flex;gap:4px;padding:12px 22px 0;border-bottom:1px solid var(--line)}
+.cat-tabs button{border:0;background:none;padding:8px 10px;font-size:13.5px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.cat-tabs button.on{color:var(--fg);border-color:var(--fg);font-weight:500}
+.cat-bar{display:flex;flex-direction:column;gap:10px}
+.cat-q{font-family:var(--sans)!important;padding:8px 12px!important}
+.cat-f{display:flex;gap:6px;flex-wrap:wrap}
+.cat-f button{border:1px solid var(--line2);background:none;border-radius:999px;padding:3px 11px;font-size:12.5px;color:var(--fg2)}
+.cat-f button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.cat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.cat-item{display:flex;gap:12px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:12px}
+.cat-item:hover{border-color:var(--line2);background:var(--sunken)}
+.cat-item .cp-ic{grid-row:auto;width:34px;height:34px;flex:none}
+.ci-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ci-t b{font-size:13.5px;font-weight:500;display:flex;gap:6px;align-items:center}
+.ci-t .ty{font-size:10.5px;font-weight:500;color:var(--muted);border:1px solid var(--line2);border-radius:4px;padding:0 4px}
+.ci-t small{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-on{font-size:11.5px;color:var(--accent);flex:none}
+.ci-add{width:24px;height:24px;flex:none;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;color:var(--fg2);font-size:15px}
+.cp-ic.lg{width:36px;height:36px;font-size:13px}
+.cat-form{display:flex;flex-direction:column;gap:14px}
+.cat-form label{display:grid;grid-template-columns:80px minmax(0,1fr);gap:12px;align-items:center;font-size:13px}
+.cat-form label>span{color:var(--muted)}
+.cat-form .seg{justify-self:start}
+.cat-yaml{width:100%;min-height:260px;resize:vertical;font-family:var(--mono);font-size:12.5px;line-height:1.6;border:1px solid var(--line2);border-radius:10px;padding:10px 12px;background:var(--sunken);color:var(--fg);outline:none}
+.cat-yaml:focus{border-color:var(--accent)}
+.cat-tools{display:flex;flex-direction:column;gap:6px}
+.cat-tools label{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px}
+.cat-tools .seg button{padding:2px 9px;font-size:11.5px}
+@media (max-width:640px){.cat-grid{grid-template-columns:minmax(0,1fr)}}
 .steps{display:flex;gap:6px;padding:0 22px;margin-top:12px}
 .steps i{flex:1;height:4px;border-radius:999px;background:var(--sunken)}
 .steps i.on{background:var(--accent)}
@@ -722,7 +755,7 @@ function renderNav(){
 /* ================= 状态 ================= */
 const state = { range:7, runOrigin:'all', runSrc:'all', curRun:'r-s1', hlEvent:null, memTab:'pending', memQuery:'', memKind:'all', memSel:new Set(), editing:null,
   tlProject:'apikey-hub', graphTypes:new Set(Object.keys(NTYPES)), selNode:'p-apikey', reportKind:'week', settingsTab:'sources',
-  sources:{claude:true,codex:true,cursor:true,trae:true,desktop:false}, budget:{used:3.2, limit:10, pendingRuns:42}, mcp:true, exec:'docker',
+  sources:{claude:true,codex:true,cursor:true,trae:true,desktop:false}, budget:{used:3.2, limit:10, pendingRuns:42}, mcp:true, exec:'docker', obs:{on:true, vault:'~/Documents/Notes', mode:'auto', kinds:{project:true,tech:true,problem:true,decision:true,memory:true}, last:'2 分钟前', files:27},
   privacy:{secret:true,entropy:true,files:true,phone:true,idcard:true,email:false} };
 let sim = null, gApi = null;
 
@@ -903,6 +936,7 @@ function renderPanel(){
   const runs = RUNS.filter(r=>r.ents && r.ents.includes(n.id));
   el.innerHTML = `<div class="card-b"><span style="color:${NTYPES[n.type].c};font-size:11.5px;font-weight:600">● ${NTYPES[n.type].name}</span>
     <h2>${esc(n.label)}</h2><p>${esc(n.desc)}</p>
+    ${state.obs.on?`<div class="row" style="gap:8px"><button class="btn sm" data-act="obs-open" data-n="${n.id}">在 Obsidian 中打开</button><button class="linkbtn" data-act="obs-preview" data-n="${n.id}" style="padding:0">预览笔记</button></div>`:''}
     <div><div class="sec-t">关联节点</div>${rels.map(r=>`<button class="link-row" data-node="${r.other.id}"><i class="dot" style="background:${NTYPES[r.other.type].c};margin:0"></i>${esc(r.other.label)}<span class="rel">${r.out?'':'← '}${r.rel}${r.out?' →':''}</span></button>`).join('')}</div>
     <div><div class="sec-t">来源运行</div>${runs.length?runs.map(r=>`<button class="link-row" data-goto-run="${r.id}"><span class="dot" style="background:${SRC[r.src].c};margin:0"></span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(r.title)}</span><span class="rel">${r.time}</span></button>`).join(''):'<p class="hint" style="padding:6px 8px">由关联推断得出</p>'}</div></div>`;
 }
@@ -984,7 +1018,7 @@ function connPopHtml(){
   const on = CONNS.filter(c=>c.on), off = CONNS.filter(c=>!c.on);
   return `<div class="cp-h"><b>本任务可用的连接器</b><span>已选 ${connUsed().length} / ${on.length}</span></div>
     <div class="cp-list">${on.map(row).join('')}${off.length?`<div class="cp-sec">未启用</div>${off.map(row).join('')}`:''}</div>
-    <div class="cp-f"><span>读命令直接执行，写命令需要确认</span><button class="linkbtn" data-goto-settings="connectors">管理连接器 →</button></div>`;
+    <div class="cp-f"><button class="linkbtn" data-act="conn-install">+ 添加连接器</button><button class="linkbtn" data-goto-settings="connectors">管理连接器 →</button></div>`;
 }
 function connPopRefresh(){ const p = $('#conn-pop'); if(p) p.innerHTML = connPopHtml(); const c = $('#conn-chip'); if(c) c.innerHTML = connChipHtml(); }
 const LARK_CMD = 'lark-cli im +messages-send --as user --chat-id oc_7f3a… --text "限流压测通过：P99 38ms…"';
@@ -1401,8 +1435,67 @@ function connCardHtml(c){
 }
 function settingsConnectors(){
   return `<div style="display:flex;gap:10px;align-items:center"><p class="hint" style="flex:1">Agent 只能通过这里启用的连接器访问外部系统。CLI 连接器用清单声明命令的读写分类与所需 scope：读命令直接执行，写命令需要确认。</p>
-    <button class="btn sm primary" data-act="conn-install">+ 安装连接器</button></div>
+    <button class="btn sm primary" data-act="conn-install">+ 添加连接器</button></div>
     <div class="src-grid">${CONNS.map(connCardHtml).join('')}</div>`;
+}
+/* Obsidian：单向导出到知识库的子文件夹，以 Open Evolve 为准 */
+const OBS_VAULTS = ['~/Documents/Notes','~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Work'];
+const obsSlug = n => n.label;
+const OBS_DIR = {project:'项目',tech:'技术',problem:'问题',decision:'决策'};
+const OBS_REL = {'使用':'uses','遇到':'has_issue','解决':'solved_by','基于':'based_on'};
+function obsNote(n){
+  const hidden = new Set(PROJECTS_PRIV.filter(([,lv])=>lv!=='full').map(([p])=>p)), ok = id => !hidden.has(NODES.find(x=>x.id===id)?.label);
+  const out = LINKS.filter(l=>(l.source.id||l.source)===n.id && ok(l.target.id||l.target)), inc = LINKS.filter(l=>(l.target.id||l.target)===n.id && ok(l.source.id||l.source));
+  const by = {}; out.forEach(l=>{ const k = OBS_REL[l.rel]||'related'; (by[k] ||= []).push(NODES.find(x=>x.id===(l.target.id||l.target))); });
+  const runs = RUNS.filter(r=>r.ents && r.ents.includes(n.id));
+  return `---
+oe_id: ${n.id}
+oe_type: ${n.type}
+tags: [oe/${n.type}]
+updated: 2026-10-29
+---
+# ${n.label}
+${n.desc}
+
+${Object.entries(by).map(([k,v])=>`${k}:: ${v.map(x=>`[[${obsSlug(x)}]]`).join(', ')}`).join('\n')}${inc.length?`\n\n## 被引用\n${inc.map(l=>{ const o = NODES.find(x=>x.id===(l.source.id||l.source)); return `- [[${obsSlug(o)}]] ${l.rel}`; }).join('\n')}`:''}
+
+## 证据
+${runs.length ? runs.map(r=>`- ${r.title} · [Run ${r.id}](http://127.0.0.1:8765/runs/${r.id})`).join('\n') : '- 由关联推断得出'}
+
+<!-- 由 Open Evolve 生成，同步时会被覆盖。你的想法请写在其他笔记里，用 [[${obsSlug(n)}]] 链接过来。 -->`;
+}
+function settingsObsidian(){
+  const O = state.obs, stats = PROJECTS_PRIV.filter(([,lv])=>lv!=='full').map(([p])=>p);
+  const icloud = O.vault.includes('iCloud');
+  return `<div class="card">
+      <div class="opt"><div class="info"><b>导出到 Obsidian</b><small>把已接受的记忆和知识图谱写成 Markdown 笔记，节点之间用 [[双链]] 连接，Obsidian 的图谱视图会直接显示</small></div><label class="switch"><input type="checkbox" id="obs-on" ${O.on?'checked':''}><span></span></label></div>
+      <div class="opt"><div class="info"><b>知识库</b><small>从 Obsidian 的知识库列表中自动发现，也可以手动选择文件夹</small></div>
+        <select class="sel" id="obs-vault" aria-label="选择 Obsidian 知识库">${OBS_VAULTS.map(v=>`<option ${v===O.vault?'selected':''}>${v}</option>`).join('')}<option>选择其他文件夹…</option></select></div>
+      ${icloud?'<div class="opt" style="background:var(--amber-soft)"><div class="info"><b style="color:var(--amber)">这个知识库在 iCloud 中</b><small>导出的笔记会随 iCloud 同步到云端。如果介意，请换一个本地知识库，或关闭导出。</small></div></div>':''}
+      <div class="opt"><div class="info"><b>写入位置</b><small>只在这个子文件夹里写文件；Open Evolve 记录自己写过的文件，删除时只删这些，不碰你自己的笔记</small></div><span class="mono" style="font-size:12.5px">${esc(O.vault)}/Open Evolve/</span></div>
+      <div class="opt"><div class="info"><b>导出内容</b><small>只导出已接受、已脱敏的内容；待确认的记忆不导出</small></div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;flex:none">${[['project','项目'],['tech','技术'],['problem','问题'],['decision','决策'],['memory','记忆原文']].map(([k,n])=>`<label style="display:flex;gap:5px;align-items:center;font-size:13px"><input type="checkbox" class="cbx" style="margin:0" data-obsk="${k}" ${O.kinds[k]?'checked':''}>${n}</label>`).join('')}</div></div>
+      <div class="opt"><div class="info"><b>同步方式</b><small>增量写入：只改动有变化的笔记</small></div>
+        <div class="seg"><button class="${O.mode==='auto'?'on':''}" data-obsm="auto">记忆变化时自动</button><button class="${O.mode==='manual'?'on':''}" data-obsm="manual">手动</button></div></div>
+      <div class="opt"><div class="info"><b>上次同步</b><small>${O.last} · 写入 ${O.files} 篇笔记${stats.length?` · 不导出“只统计”的项目：${stats.join('、')}`:''}</small></div>
+        <div style="display:flex;gap:8px;flex:none"><button class="btn sm" data-act="obs-preview">预览笔记</button><button class="btn sm" data-act="obs-open">在 Obsidian 中打开</button><button class="btn sm primary" data-act="obs-sync">立即同步</button></div></div></div>
+    <div class="card"><div class="card-h"><h3>在 Obsidian 里怎么看</h3></div><div class="card-b" style="display:flex;flex-direction:column;gap:10px">
+      <pre class="codeblk">${esc(O.vault)}/Open Evolve/
+  项目/apikey-hub.md
+  技术/Redis.md
+  问题/多实例限流不准.md
+  决策/Redis 滑动窗口.md
+  记忆/m12 限流改为 Redis 滑动窗口.md</pre>
+      <p class="hint" style="margin:0">图谱配色：在 Obsidian 图谱视图的“分组”里添加 <span class="mono">tag:#oe/project</span>、<span class="mono">tag:#oe/tech</span>、<span class="mono">tag:#oe/problem</span>、<span class="mono">tag:#oe/decision</span>。Open Evolve 不会修改 <span class="mono">.obsidian/</span> 里的任何配置。</p>
+      <p class="hint" style="margin:0">关系类型写成 <span class="mono">uses:: [[Redis]]</span> 这样的字段：图谱里显示为连线，装了 Dataview 插件还可以按关系查询。笔记里的 Run 链接指向本机服务，点击可以回到原始对话。</p>
+      <p class="hint" style="margin:0">导出的笔记以 Open Evolve 为准，下次同步会覆盖。你的想法请写在自己的笔记里，用 [[双链]] 链接过来，这些笔记不会被改动。遗忘某个项目时，对应的笔记会一起删除。</p></div></div>`;
+}
+function obsPreview(id){
+  const n = NODES.find(x=>x.id===(id||state.selNode)) || NODES[0], dir = OBS_DIR[n.type];
+  modal(`<div class="modal-h"><h3>预览：Open Evolve/${dir}/${esc(n.label)}.md</h3></div><div class="modal-b">
+    <pre class="diff" style="color:var(--fg2)">${esc(obsNote(n))}</pre>
+    <p class="hint" style="margin:0">在 Obsidian 中，<span class="mono">uses::</span> 等字段里的双链会成为图谱中的连线。</p></div>
+    <div class="modal-f"><button class="btn" data-act="close">关闭</button><button class="btn primary" data-act="obs-open" data-n="${n.id}">在 Obsidian 中打开</button></div>`);
 }
 function settingsSecurity(){
   return `<div class="card">
@@ -1425,15 +1518,86 @@ function manifestModal(c){
   modal(`<div class="modal-h"><h3>${c.name} · 清单</h3></div><div class="modal-b"><pre class="diff">${esc(body)}</pre><p class="hint">清单按代码对待：只能由你安装，升级时会以 diff 展示新增的权限。</p></div>
     <div class="modal-f"><button class="btn" data-act="close">关闭</button></div>`);
 }
-function installModal(){
-  modal(`<div class="modal-h"><h3>安装连接器：Notion（CLI）</h3></div><div class="modal-b">
-    <p class="hint">这个清单会给 Agent 新增以下权限，请确认：</p>
-<pre class="diff"><span class="add">+ binary   notion-cli ≥ 0.9</span>
-<span class="add">+ read     page get · database query · search</span>
-<span class="warn">+ write    page create · page update · block append   （需要确认）</span>
-<span class="add">+ scopes   read_content, update_content, insert_content</span>
-<span class="warn">+ env      NOTION_TOKEN ← keychain:open-evolve/notion</span></pre></div>
-    <div class="modal-f"><button class="btn" data-act="close">取消</button><button class="btn primary" data-act="conn-install-ok">安装</button></div>`);
+/* 连接器目录：浏览 → 详情（权限 diff）→ 安装；另可添加自定义 MCP / 导入 CLI 清单 */
+const CATALOG = [
+  {id:'lark', name:'飞书', type:'CLI', bin:'lark-cli', cat:'办公协作', ab:'飞', bg:'#3370ff', desc:'消息、日历、云文档、多维表格、审批', auth:'设备码授权 · user / bot', read:'calendar +agenda · docs +fetch · im +search', write:'im +messages-send · docs +update', scopes:'按命令申请，缺失时进入授权中心'},
+  {id:'gh', name:'GitHub', type:'CLI', bin:'gh', cat:'开发', ab:'GH', bg:'var(--fg)', fg:'var(--bg)', desc:'仓库、PR、Issue、Actions', auth:'gh auth login · 浏览器授权', read:'pr view · issue list · run view', write:'pr create · issue comment · release create', scopes:'repo, read:org, workflow（可选）'},
+  {id:'figma', name:'Figma', type:'MCP', cat:'设计', ab:'F', bg:'#8b5cf6', desc:'读取设计稿、组件与变量', auth:'远程 MCP · OAuth', read:'get_file · get_components · get_variables', write:'无', scopes:'file_content:read'},
+  {id:'notion', name:'Notion', type:'CLI', bin:'notion-cli', cat:'办公协作', ab:'N', bg:'#37352f', desc:'页面、数据库与搜索', auth:'Integration token（存入钥匙串）', read:'page get · database query · search', write:'page create · page update · block append', scopes:'read_content, update_content, insert_content'},
+  {id:'slack', name:'Slack', type:'MCP', cat:'办公协作', ab:'S', bg:'#4a154b', desc:'频道消息、搜索与发消息', auth:'远程 MCP · OAuth', read:'search_messages · read_channel', write:'post_message', scopes:'channels:history, chat:write'},
+  {id:'linear', name:'Linear', type:'MCP', cat:'开发', ab:'L', bg:'#5e6ad2', desc:'Issue、项目与迭代', auth:'远程 MCP · OAuth', read:'list_issues · get_issue', write:'create_issue · update_issue', scopes:'read, write'},
+  {id:'glab', name:'GitLab', type:'CLI', bin:'glab', cat:'开发', ab:'GL', bg:'#e24329', desc:'MR、Issue、流水线（含自建实例）', auth:'glab auth login · token', read:'mr view · ci status', write:'mr create · mr merge', scopes:'api, read_repository'},
+  {id:'jira', name:'Jira', type:'MCP', cat:'开发', ab:'J', bg:'#0c66e4', desc:'工单查询、流转与评论', auth:'远程 MCP · OAuth', read:'search_issues · get_issue', write:'transition_issue · add_comment', scopes:'read:jira-work, write:jira-work'},
+  {id:'sentry', name:'Sentry', type:'MCP', cat:'开发', ab:'Se', bg:'#362d59', desc:'错误事件与堆栈', auth:'远程 MCP · OAuth', read:'list_issues · get_event', write:'resolve_issue', scopes:'event:read, project:read'},
+  {id:'gcal', name:'Google 日历', type:'MCP', cat:'办公协作', ab:'GC', bg:'#1a73e8', desc:'日程查询与创建', auth:'远程 MCP · OAuth', read:'list_events · freebusy', write:'create_event', scopes:'calendar.readonly, calendar.events'},
+  {id:'pg', name:'PostgreSQL', type:'MCP', cat:'数据', ab:'PG', bg:'#336791', desc:'只读查询本地或测试库', auth:'本地 stdio · 连接串存入钥匙串', read:'query（只读事务）· list_tables', write:'无', scopes:'—'},
+  {id:'kubectl', name:'Kubernetes', type:'CLI', bin:'kubectl', cat:'运维', ab:'K8', bg:'#326ce5', desc:'查看资源、日志，受限的变更', auth:'kubeconfig 上下文', read:'get · describe · logs', write:'apply · rollout restart · delete', scopes:'由 RBAC 决定'},
+];
+const CAT_UI = {tab:'catalog', q:'', f:'全部', sel:null};
+const catInstalled = id => CONNS.some(c=>c.id===id);
+function installModal(){ Object.assign(CAT_UI,{tab:'catalog', q:'', f:'全部', sel:null}); modal(''); $('.modal').classList.add('wide'); catRender(); }
+function catRender(){
+  const m = $('.modal'); if(!m) return; m.classList.toggle('tall', !CAT_UI.sel);
+  if(CAT_UI.sel){ const c = CATALOG.find(x=>x.id===CAT_UI.sel), inst = catInstalled(c.id);
+    m.innerHTML = `<div class="modal-h"><button class="icbtn" data-act="cat-back" aria-label="返回目录">←</button><span class="cp-ic lg" style="background:${c.bg};${c.fg?'color:'+c.fg:''}">${c.ab}</span>
+        <div style="min-width:0"><h3>${c.name}</h3><div class="muted" style="font-size:12.5px">${c.type}${c.bin?' · '+c.bin:''} · ${c.auth}</div></div></div>
+      <div class="modal-b"><p style="margin:0;color:var(--fg2)">${c.desc}</p>
+        <p class="hint" style="margin:0">${inst?'已安装。':'安装后会给 Agent 新增以下能力，请确认：'}</p>
+<pre class="diff"><span class="add">+ ${c.type==='CLI'?'binary  ':'server  '} ${c.type==='CLI'?c.bin+'（安装时检测版本）':c.auth}</span>
+<span class="add">+ read     ${c.read}   （直接执行）</span>
+${c.write==='无'?'<span class="add">+ write    无</span>':`<span class="warn">+ write    ${c.write}   （需要确认）</span>`}
+<span class="add">+ scopes   ${c.scopes}</span>
+<span class="warn">+ secret   ${c.id.toUpperCase()}_TOKEN ← keychain:open-evolve/${c.id}</span></pre>
+        <p class="hint" style="margin:0">安装后默认<b>不启用</b>，授权完成并打开开关后，Agent 才能使用。清单中未列出的命令一律按写操作处理。</p></div>
+      <div class="modal-f"><button class="btn" data-act="cat-back">返回</button>${inst?'<button class="btn" disabled>已安装</button>':`<button class="btn primary" data-act="cat-install" data-c="${c.id}">安装</button>`}</div>`;
+    return; }
+  const tabs = [['catalog','目录'],['mcp','自定义 MCP'],['cli','自定义 CLI']];
+  let body = '';
+  if(CAT_UI.tab==='catalog'){
+    const cats = ['全部', ...new Set(CATALOG.map(c=>c.cat))], q = CAT_UI.q.trim().toLowerCase();
+    const list = CATALOG.filter(c => (CAT_UI.f==='全部' || c.cat===CAT_UI.f) && (!q || (c.name+c.desc+(c.bin||'')).toLowerCase().includes(q)));
+    body = `<div class="cat-bar"><input class="txt cat-q" id="cat-q" placeholder="搜索连接器…" value="${esc(CAT_UI.q)}" aria-label="搜索连接器">
+        <div class="cat-f">${cats.map(f=>`<button class="${CAT_UI.f===f?'on':''}" data-catf="${f}">${f}</button>`).join('')}</div></div>
+      <div class="cat-grid" id="cat-grid">${list.length ? list.map(c=>`<button class="cat-item" data-cat="${c.id}"><span class="cp-ic" style="background:${c.bg};${c.fg?'color:'+c.fg:''}">${c.ab}</span>
+          <span class="ci-t"><b>${c.name}<span class="ty">${c.type}</span></b><small>${c.desc}</small></span>${catInstalled(c.id)?'<span class="ci-on">已安装</span>':'<span class="ci-add" aria-hidden="true">+</span>'}</button>`).join('')
+        : `<p class="hint" style="grid-column:1/-1">没有找到“${esc(CAT_UI.q)}”。可以在“自定义 MCP”或“自定义 CLI”里自己添加。</p>`}</div>`;
+  } else if(CAT_UI.tab==='mcp'){
+    body = `<div class="cat-form">
+      <label><span>名称</span><input class="txt" value="内部知识库" style="font-family:var(--sans)"></label>
+      <label><span>连接方式</span><div class="seg"><button class="on">远程 HTTP</button><button>本地 stdio</button></div></label>
+      <label><span>地址</span><input class="txt" value="https://kb.internal.example.com/mcp"></label>
+      <label><span>认证</span><div class="seg"><button class="on">OAuth</button><button>Header token</button><button>无</button></div></label>
+      <p class="hint" style="margin:0">下一步会连接服务、列出它提供的工具。每个工具默认按<b>写操作</b>处理（需要确认），你可以把确认无副作用的工具标为只读。</p></div>`;
+  } else {
+    body = `<div class="cat-form"><p class="hint" style="margin:0">CLI 连接器由一份清单描述：二进制、授权方式、每条命令的读写分类和所需 scope。粘贴清单或选择文件：</p>
+      <textarea class="txt cat-yaml" spellcheck="false" aria-label="连接器清单">name: dingtalk
+binary: dws
+version: ">=0.3"
+auth:
+  status: dws auth status --json
+  identity: explicit
+  grant:
+    start:    dws auth login --scope {scopes} --no-wait --json
+    complete: dws auth login --device-code {device_code}
+commands:
+  "calendar list":  { as: user, scopes: [Calendar.Event.Read], kind: read }
+  "msg send":       { as: user, scopes: [Im.Message.Send], kind: write }
+  "*":              { kind: write }</textarea>
+      <div style="display:flex;gap:10px;align-items:center"><button class="btn sm" data-act="cat-file">选择文件…</button><span class="hint" style="margin:0">下一步会校验清单并以 diff 展示新增的权限</span></div></div>`;
+  }
+  m.innerHTML = `<div class="modal-h"><h3>添加连接器</h3><div class="sp"></div><button class="icbtn" data-act="close" aria-label="关闭">×</button></div>
+    <div class="cat-tabs">${tabs.map(([k,n])=>`<button class="${CAT_UI.tab===k?'on':''}" data-cattab="${k}">${n}</button>`).join('')}</div>
+    <div class="modal-b">${body}</div>
+    ${CAT_UI.tab==='catalog' ? '<div class="modal-f" style="justify-content:space-between"><span class="hint" style="margin:0">目录里的连接器都附带审核过的清单；找不到的可以自定义添加</span><button class="btn" data-act="close">完成</button></div>'
+      : `<div class="modal-f"><button class="btn" data-act="close">取消</button><button class="btn primary" data-act="cat-next">${CAT_UI.tab==='mcp'?'连接并列出工具':'校验清单'}</button></div>`}`;
+}
+function catInstall(id){
+  const c = CATALOG.find(x=>x.id===id); if(catInstalled(id)) return;
+  CONNS.push({id, type:c.type, name:c.name+(c.bin?' '+c.bin:''), on:false, ver:c.type==='CLI'?`${c.bin}（已检测到）`:c.auth, cmds:`读 ${c.read.split(' · ').length} · 写 ${c.write==='无'?0:c.write.split(' · ').length}`,
+    ids:[['user','未授权','wait']], granted:[], missing:c.scopes.includes(',')||c.scopes.includes(':')?c.scopes.split(/,\s*/).map(sc=>({scope:sc,layer:'user',as:'user',for:'安装后首次授权'})):[]});
+  CONN_IC[id] = [c.ab, c.bg]; CONN_USE[id] = false;
+  closeModal(); if(route()==='settings') render(); connPopRefresh();
+  toast(`已安装 ${c.name}：默认未启用，完成授权后打开开关即可使用`);
 }
 
 /* ================= 任务 ================= */
@@ -1493,7 +1657,7 @@ const SOURCES = [
 ];
 const PROJECTS_PRIV = [['apikey-hub','full'],['AIDashboard','full'],['ai-webhook','full'],['feishu-skills','full'],['autel-app','stats_only'],['AdministrativeWorkbench','full'],['personal-notes','excluded']];
 function viewSettings(){
-  const tabs = [['sources','数据源'],['models','模型档案'],['bindings','用途绑定'],['connectors','连接器'],['privacy','隐私与脱敏'],['security','安全'],['budget','预算'],['mcp','MCP 记忆服务']];
+  const tabs = [['sources','数据源'],['models','模型档案'],['bindings','用途绑定'],['connectors','连接器'],['privacy','隐私与脱敏'],['security','安全'],['budget','预算'],['mcp','MCP 记忆服务'],['obsidian','Obsidian']];
   let body = '';
   if(state.settingsTab==='sources') body = `<div class="src-grid">${SOURCES.map(s=>`<div class="card src-card">
       <div class="src-top"><div class="logo" style="background:${SRC[s.k]?SRC[s.k].c:'#7a7f86'}">${SRC[s.k]?SRC[s.k].ab:'CD'}</div><div style="min-width:0"><b>${s.name}</b><small>${s.fmt}</small></div>
@@ -1535,6 +1699,7 @@ function viewSettings(){
 get_project_context(project)
 list_recent_decisions(days = 30)</pre></div>
       <div class="opt" style="display:block"><div class="sec-t" style="margin-bottom:8px">在 Claude Code 中添加（stdio，本机进程，不监听端口）</div><pre class="codeblk">claude mcp add open-evolve -- open-evolve mcp</pre></div></div>`;
+  if(state.settingsTab==='obsidian') body = settingsObsidian();
   return `<div class="page" style="max-width:1040px"><div class="tabs">${tabs.map(([k,n])=>`<button class="${state.settingsTab===k?'on':''}" data-st="${k}">${n}</button>`).join('')}</div>${body}</div>`;
 }
 
@@ -1625,6 +1790,12 @@ document.addEventListener('click', e => {
   else if(d.exec){ state.exec=d.exec; render(); toast(d.exec==='host'?'已切换为本机直接执行：请谨慎':'已切换回 Docker 沙箱'); }
   else if(d.agv){ AG.view = d.agv; document.querySelectorAll('.a-task').forEach(b=>b.classList.toggle('cur', b===t)); agRender(); if(AG.view==='live') $('#ag-thread').scrollTop = 1e9; }
   else if(d.openTask){ AG.view = d.openTask; location.hash = 'agent'; }
+  else if(d.cat){ CAT_UI.sel = d.cat; catRender(); }
+  else if(d.catf){ CAT_UI.f = d.catf; catRender(); }
+  else if(d.cattab){ CAT_UI.tab = d.cattab; CAT_UI.sel = null; catRender(); }
+  else if(t.closest('.cat-form .seg') && !d.act){ t.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b===t)); }
+  else if(t.closest('.cat-tools .seg')){ t.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b===t)); }
+  else if(d.obsm){ state.obs.mode = d.obsm; render(); }
   else if(d.ij){ agUndoInterject(+d.ij); }
   else if(d.q){ agQueueOp(d.qop, +d.q); }
   else if(d.qauto){ AG.qAuto = d.qauto==='auto'; agRender(); }
@@ -1676,7 +1847,25 @@ function act(a, t, d){
     case 'conn-manifest': manifestModal(CONNS.find(x=>x.id===d.c)); break;
     case 'conn-check': t.textContent='体检中…'; setTimeout(()=>{ t.textContent='重新体检'; toast('体检完成：版本、身份、scope 与上次一致'); }, 700); break;
     case 'conn-install': installModal(); break;
-    case 'conn-install-ok': closeModal(); toast('原型：已安装 Notion 连接器（默认未启用）'); break;
+    case 'obs-preview': obsPreview(d.n); break;
+    case 'obs-open': { const n = NODES.find(x=>x.id===d.n); const file = n ? `Open Evolve/${OBS_DIR[n.type]}/${n.label}` : 'Open Evolve';
+      toast(`原型：打开 obsidian://open?vault=Notes&file=${encodeURIComponent(file)}`); break; }
+    case 'obs-sync': t.textContent='同步中…'; setTimeout(()=>{ state.obs.last='刚刚'; render(); toast('已同步：更新 3 篇，新增 1 篇，删除 0 篇'); }, 700); break;
+    case 'cat-back': CAT_UI.sel=null; catRender(); break;
+    case 'cat-install': catInstall(d.c); break;
+    case 'cat-file': toast('原型：会打开文件选择器，读取 .yaml 清单'); break;
+    case 'cat-next': if(CAT_UI.tab==='mcp'){ $('.modal .modal-b').innerHTML = `<p class="hint" style="margin:0">已连接“内部知识库”，发现 4 个工具。请确认哪些是只读的：</p>
+        <div class="cat-tools">${[['search_docs','搜索文档',true],['get_doc','读取文档',true],['create_doc','新建文档',false],['delete_doc','删除文档',false]].map(([n,d,r])=>`<label><span class="mono">${n}</span><span class="muted" style="flex:1">${d}</span><span class="seg"><button class="${r?'on':''}">只读</button><button class="${r?'':'on'}">写（需确认）</button></span></label>`).join('')}</div>`;
+        t.textContent = '安装'; t.dataset.act = 'cat-done'; }
+      else { $('.modal .modal-b').innerHTML = `<p class="hint" style="margin:0">清单校验通过：已检测到 dws 0.4.1。这个清单会给 Agent 新增以下权限，请确认：</p>
+<pre class="diff"><span class="add">+ binary   dws ≥ 0.3（已检测到 0.4.1）</span>
+<span class="add">+ read     calendar list</span>
+<span class="warn">+ write    msg send   （需要确认）</span>
+<span class="warn">+ write    *  未列出的命令   （需要确认）</span>
+<span class="add">+ scopes   Calendar.Event.Read, Im.Message.Send</span></pre>`;
+        t.textContent = '安装'; t.dataset.act = 'cat-done'; }
+      break;
+    case 'cat-done': closeModal(); toast('原型：已安装自定义连接器，默认未启用'); break;
     case 'forget': { const p = $('#forget-p').value; modal(`<div class="modal-h"><h3>遗忘 ${esc(p)}？</h3></div><div class="modal-b"><p class="hint">将删除该项目的全部 Run、证据、全文索引、向量和附件，无法恢复。只依赖这些证据的记忆会标记为“失去证据”。</p></div>
       <div class="modal-f"><button class="btn" data-act="close">取消</button><button class="btn danger" data-act="forget-ok" data-p="${esc(p)}">确认遗忘</button></div>`); break; }
     case 'forget-ok': closeModal(); toast(`已遗忘 ${d.p}：删除 412 个 Run，7 条记忆标记为“失去证据”`); break;
@@ -1715,9 +1904,13 @@ document.addEventListener('change', e => {
   if(t.id==='bud'){ state.budget.limit = Math.max(1, +t.value||10); toast(`每日预算已设为 ¥${state.budget.limit}`); }
   if(d.cu){ CONN_USE[d.cu]=t.checked; connPopRefresh(); }
   if(d.conn){ CONNS.find(x=>x.id===d.conn).on=t.checked; toast(t.checked?'已启用：Agent 可以使用这个连接器':'已停用：Agent 将看不到这个连接器'); }
+  if(t.id==='obs-on'){ state.obs.on=t.checked; toast(t.checked?'已开启 Obsidian 导出':'已关闭 Obsidian 导出：已写入的笔记保留，不再更新'); }
+  if(t.id==='obs-vault'){ if(t.value.startsWith('选择')){ toast('原型：会打开文件夹选择器'); t.value=state.obs.vault; } else { state.obs.vault=t.value; render(); } }
+  if(t.dataset.obsk){ state.obs.kinds[t.dataset.obsk]=t.checked; }
   if(t.id==='mcp'){ state.mcp=t.checked; toast(t.checked?'MCP 记忆服务已启用':'MCP 记忆服务已停用'); }
 });
 document.addEventListener('input', e => {
+  if(e.target.id==='cat-q'){ CAT_UI.q = e.target.value; const pos = e.target.selectionStart; catRender(); const q = $('#cat-q'); q.focus(); q.setSelectionRange(pos, pos); return; }
   if(e.target.id==='memq'){ state.memQuery=e.target.value; const q=state.memQuery.trim().toLowerCase();
     $('#memres').innerHTML = memResults(MEM.filter(m=>m.status!=='rejected' && (state.memKind==='all'||m.kind===state.memKind) && (!q || (m.title+m.project+m.ev.q).toLowerCase().includes(q)))); }
 });
