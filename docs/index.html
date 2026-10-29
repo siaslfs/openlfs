@@ -492,14 +492,51 @@ input.txt{border:1px solid var(--line2);background:var(--panel);border-radius:8p
 .modal.wide{width:min(760px,100%)}
 .modal.wide.tall{height:min(640px,calc(100vh - 32px))}
 .modal.wide .modal-b{flex:1}
+.cat-feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cat-fc{display:flex;flex-direction:column;align-items:flex-start;gap:12px;text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px;min-height:96px}
+.cat-fc:hover{background:var(--sunken)}
+.cat-fc b{font-size:13px;font-weight:600}
+.cat-menu{position:absolute;right:0;top:calc(100% + 6px);width:230px;background:var(--panel);border:1px solid var(--line2);border-radius:12px;box-shadow:var(--shadow);padding:6px;z-index:3;display:flex;flex-direction:column}
+.cat-menu button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;border:0;background:none;text-align:left;padding:8px 10px;border-radius:8px}
+.cat-menu button:hover{background:var(--sunken)}
+.cat-menu b{font-size:13px;font-weight:500}
+.cat-menu small{font-size:11.5px;color:var(--muted)}
+.cd-x{position:absolute;top:14px;right:14px;z-index:2}
+.cd-back{position:absolute;top:14px;left:14px;z-index:2}
+.modal{position:relative}
+.cd{gap:26px!important;padding:34px 30px 30px!important}
+.cd-hero{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.cd-hero h3{margin:4px 0 0;font-size:20px}
+.cd-hero p{margin:0;color:var(--fg2);max-width:480px}
+.cd-hero .btn.primary{min-width:96px;justify-content:center;margin-top:6px}
+.cd-st{color:var(--accent);font-weight:500;margin-top:6px}
+.cp-ic.xl{width:64px;height:64px;border-radius:16px;font-size:20px;box-shadow:var(--shadow)}
+.cd-sec h4{margin:0 0 10px;font-size:14px}
+.cd-ex{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.cd-exi{display:flex;flex-direction:column;gap:10px;align-items:flex-start;text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:14px;font-size:13px;color:var(--fg2);line-height:1.55}
+.cd-exi:hover{background:var(--sunken);color:var(--fg)}
+.cd-exi svg{color:var(--muted)}
+.cd-box{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.cd-perm{display:grid;grid-template-columns:130px minmax(0,1fr);gap:12px;font-size:13px}
+.cd-perm>span{color:var(--muted)}
+.cd-perm div{display:flex;flex-wrap:wrap;gap:6px}
+.cd-perm code{font-family:var(--mono);font-size:11.5px;background:var(--sunken);border-radius:6px;padding:2px 7px}
+.cd-info{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 20px}
+.cd-info>div{display:flex;flex-direction:column;gap:3px;font-size:13px}
+.cd-info span{color:var(--muted);font-size:12px}
+.cd-info b{font-weight:500}
+.cd-links{display:flex;gap:12px}
+.cd-links .linkbtn{padding:0;font-size:13px;color:var(--accent)}
+@media (max-width:640px){.cat-feat,.cd-ex,.cd-info{grid-template-columns:minmax(0,1fr)}.cd-perm{grid-template-columns:minmax(0,1fr);gap:4px}}
 .cat-tabs{display:flex;gap:4px;padding:12px 22px 0;border-bottom:1px solid var(--line)}
 .cat-tabs button{border:0;background:none;padding:8px 10px;font-size:13.5px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
 .cat-tabs button.on{color:var(--fg);border-color:var(--fg);font-weight:500}
 .cat-bar{display:flex;flex-direction:column;gap:10px}
 .cat-q{font-family:var(--sans)!important;padding:8px 12px!important}
 .cat-f{display:flex;gap:6px;flex-wrap:wrap}
-.cat-f button{border:1px solid var(--line2);background:none;border-radius:999px;padding:3px 11px;font-size:12.5px;color:var(--fg2)}
-.cat-f button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.cat-f button{border:0;background:none;border-radius:8px;padding:5px 11px;font-size:13px;color:var(--muted)}
+.cat-f button:hover{color:var(--fg)}
+.cat-f button.on{background:var(--sunken);color:var(--fg);font-weight:500}
 .cat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .cat-item{display:flex;gap:12px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:12px}
 .cat-item:hover{border-color:var(--line2);background:var(--sunken)}
@@ -507,8 +544,8 @@ input.txt{border:1px solid var(--line2);background:var(--panel);border-radius:8p
 .ci-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .ci-t b{font-size:13.5px;font-weight:500;display:flex;gap:6px;align-items:center}
 .ci-t .ty{font-size:10.5px;font-weight:500;color:var(--muted);border:1px solid var(--line2);border-radius:4px;padding:0 4px}
-.ci-t small{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ci-on{font-size:11.5px;color:var(--accent);flex:none}
+.ci-t small{font-size:12px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.5}
+.ci-on{width:24px;height:24px;flex:none;display:grid;place-items:center;color:var(--fg2);font-size:15px}
 .ci-add{width:24px;height:24px;flex:none;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;color:var(--fg2);font-size:15px}
 .cp-ic.lg{width:36px;height:36px;font-size:13px}
 .cat-form{display:flex;flex-direction:column;gap:14px}
@@ -1533,34 +1570,58 @@ const CATALOG = [
   {id:'pg', name:'PostgreSQL', type:'MCP', cat:'数据', ab:'PG', bg:'#336791', desc:'只读查询本地或测试库', auth:'本地 stdio · 连接串存入钥匙串', read:'query（只读事务）· list_tables', write:'无', scopes:'—'},
   {id:'kubectl', name:'Kubernetes', type:'CLI', bin:'kubectl', cat:'运维', ab:'K8', bg:'#326ce5', desc:'查看资源、日志，受限的变更', auth:'kubeconfig 上下文', read:'get · describe · logs', write:'apply · rollout restart · delete', scopes:'由 RBAC 决定'},
 ];
-const CAT_UI = {tab:'catalog', q:'', f:'全部', sel:null};
+const CAT_EX = {
+  lark:['看看我今天和明天的日程，标出时间冲突','把 apikey-hub 本周的进展整理成一条消息，发到开发群','在云文档里找到上周的评审纪要，总结待办','查一下我还有哪些审批没处理'],
+  gh:['列出 apikey-hub 里等我评审的 PR，按改动大小排序','看看最近一次 CI 失败的原因','给 feat/loadtest 开一个 PR，描述写清压测结果'],
+  figma:['读取这个设计稿的颜色和字号变量，生成 CSS tokens','对比设计稿和当前页面的间距差异'],
+  notion:['在 Notion 里找到关于限流的笔记并总结','把今天的工作记录追加到我的日志页'],
+  slack:['总结 #dev 频道今天的讨论','找出最近一周提到我的消息'],
+  linear:['列出本迭代分配给我的 Issue','把这个 bug 建成 Linear Issue，附上复现步骤'],
+  glab:['看看这个 MR 的流水线为什么失败','列出等我审核的 MR'],
+  jira:['列出本周到期的工单','把 PROJ-123 流转到“测试中”并留言'],
+  sentry:['看看 apikey-hub 最近 24 小时新增的错误','找出最高频错误的堆栈并定位代码'],
+  gcal:['帮我找下周三下午都空闲的时间','查一下明天的会议安排'],
+  pg:['统计 api_keys 表里最近 7 天新建的数量','看看哪些表没有主键'],
+  kubectl:['看看 staging 里哪些 Pod 在重启','拉取 apikey-hub 最近 100 行日志'],
+};
+const CAT_FEAT = [['lark','让消息、日程和文档协同起来。'],['gh','跟进代码评审与 CI 状态。'],['figma','从设计稿直接读取组件与变量。']];
+const CAT_UI = {tab:'catalog', q:'', f:'全部', sel:null, menu:false};
 const catInstalled = id => CONNS.some(c=>c.id===id);
 function installModal(){ Object.assign(CAT_UI,{tab:'catalog', q:'', f:'全部', sel:null}); modal(''); $('.modal').classList.add('wide'); catRender(); }
+function catIc(c, cls=''){ return `<span class="cp-ic ${cls}" style="background:${c.bg};${c.fg?'color:'+c.fg:''}">${c.ab}</span>`; }
 function catRender(){
   const m = $('.modal'); if(!m) return; m.classList.toggle('tall', !CAT_UI.sel);
-  if(CAT_UI.sel){ const c = CATALOG.find(x=>x.id===CAT_UI.sel), inst = catInstalled(c.id);
-    m.innerHTML = `<div class="modal-h"><button class="icbtn" data-act="cat-back" aria-label="返回目录">←</button><span class="cp-ic lg" style="background:${c.bg};${c.fg?'color:'+c.fg:''}">${c.ab}</span>
-        <div style="min-width:0"><h3>${c.name}</h3><div class="muted" style="font-size:12.5px">${c.type}${c.bin?' · '+c.bin:''} · ${c.auth}</div></div></div>
-      <div class="modal-b"><p style="margin:0;color:var(--fg2)">${c.desc}</p>
-        <p class="hint" style="margin:0">${inst?'已安装。':'安装后会给 Agent 新增以下能力，请确认：'}</p>
-<pre class="diff"><span class="add">+ ${c.type==='CLI'?'binary  ':'server  '} ${c.type==='CLI'?c.bin+'（安装时检测版本）':c.auth}</span>
-<span class="add">+ read     ${c.read}   （直接执行）</span>
-${c.write==='无'?'<span class="add">+ write    无</span>':`<span class="warn">+ write    ${c.write}   （需要确认）</span>`}
-<span class="add">+ scopes   ${c.scopes}</span>
-<span class="warn">+ secret   ${c.id.toUpperCase()}_TOKEN ← keychain:open-evolve/${c.id}</span></pre>
-        <p class="hint" style="margin:0">安装后默认<b>不启用</b>，授权完成并打开开关后，Agent 才能使用。清单中未列出的命令一律按写操作处理。</p></div>
-      <div class="modal-f"><button class="btn" data-act="cat-back">返回</button>${inst?'<button class="btn" disabled>已安装</button>':`<button class="btn primary" data-act="cat-install" data-c="${c.id}">安装</button>`}</div>`;
+  if(CAT_UI.sel){ const c = CATALOG.find(x=>x.id===CAT_UI.sel), inst = catInstalled(c.id), conn = CONNS.find(x=>x.id===c.id);
+    const ready = conn && conn.on && !conn.ids.some(x=>x[2]==='wait');
+    const chips = str => str==='无' ? '<span class="muted">无</span>' : str.split(' · ').map(x=>`<code>${esc(x)}</code>`).join('');
+    m.innerHTML = `<button class="icbtn cd-back" data-act="cat-back" aria-label="返回连接器列表">←</button><button class="icbtn cd-x" data-act="close" aria-label="关闭">×</button>
+      <div class="modal-b cd">
+        <div class="cd-hero">${catIc(c,'xl')}<h3>${c.name}</h3><p>${c.desc}</p>
+          ${ready ? '<div class="cd-st">✓ 已连接</div><button class="btn sm" data-goto-settings="connectors" data-act="close">管理</button>'
+            : inst ? `<button class="btn primary" data-act="cat-auth" data-c="${c.id}">授权</button><span class="hint" style="margin:0">已安装，完成授权并启用后 Agent 才能使用</span>`
+            : `<button class="btn primary" data-act="cat-install" data-c="${c.id}">连接</button>`}</div>
+        <div class="cd-sec"><h4>示例提示词</h4><div class="cd-ex">${(CAT_EX[c.id]||[]).map(x=>`<button class="cd-exi" data-act="cat-try" data-c="${c.id}" data-x="${esc(x)}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" stroke-width="2.4" stroke-linecap="round"/></svg><span>${esc(x)}</span></button>`).join('')}</div></div>
+        <div class="cd-sec"><h4>权限</h4><div class="cd-box">
+          <div class="cd-perm"><span>读取 · 直接执行</span><div>${chips(c.read)}</div></div>
+          <div class="cd-perm"><span>写入 · 每次需要你确认</span><div>${chips(c.write)}</div></div>
+          <div class="cd-perm"><span>需要的授权</span><div>${c.scopes.split(/,\s*/).map(x=>`<code>${esc(x)}</code>`).join('')}</div></div>
+          <p class="hint" style="margin:0">凭据只保存在系统钥匙串中，不会进入对话、日志或模型请求。清单里没有列出的命令一律按写入处理。</p></div></div>
+        <div class="cd-sec"><h4>详情</h4><div class="cd-box cd-info">
+          <div><span>分类</span><b>${c.cat}</b></div><div><span>连接器类型</span><b>${c.type}${c.bin?' · '+c.bin:''}</b></div>
+          <div><span>授权方式</span><b>${c.auth}</b></div><div><span>清单来源</span><b>内置目录 · 已审核</b></div>
+          <div><span>更多信息</span><b class="cd-links"><button class="linkbtn" data-act="cat-link">网站 ↗</button><button class="linkbtn" data-act="cat-link">文档 ↗</button><button class="linkbtn" data-act="cat-manifest" data-c="${c.id}">查看清单</button></b></div></div></div>
+      </div>`;
     return; }
-  const tabs = [['catalog','目录'],['mcp','自定义 MCP'],['cli','自定义 CLI']];
   let body = '';
   if(CAT_UI.tab==='catalog'){
     const cats = ['全部', ...new Set(CATALOG.map(c=>c.cat))], q = CAT_UI.q.trim().toLowerCase();
     const list = CATALOG.filter(c => (CAT_UI.f==='全部' || c.cat===CAT_UI.f) && (!q || (c.name+c.desc+(c.bin||'')).toLowerCase().includes(q)));
-    body = `<div class="cat-bar"><input class="txt cat-q" id="cat-q" placeholder="搜索连接器…" value="${esc(CAT_UI.q)}" aria-label="搜索连接器">
+    body = `${q||CAT_UI.f!=='全部'?'':`<div class="cat-feat">${CAT_FEAT.map(([id,t])=>{ const c = CATALOG.find(x=>x.id===id); return `<button class="cat-fc" data-cat="${id}">${catIc(c)}<b>${t}</b></button>`; }).join('')}</div>`}
+      <div class="cat-bar"><input class="txt cat-q" id="cat-q" placeholder="搜索" value="${esc(CAT_UI.q)}" aria-label="搜索连接器">
         <div class="cat-f">${cats.map(f=>`<button class="${CAT_UI.f===f?'on':''}" data-catf="${f}">${f}</button>`).join('')}</div></div>
-      <div class="cat-grid" id="cat-grid">${list.length ? list.map(c=>`<button class="cat-item" data-cat="${c.id}"><span class="cp-ic" style="background:${c.bg};${c.fg?'color:'+c.fg:''}">${c.ab}</span>
-          <span class="ci-t"><b>${c.name}<span class="ty">${c.type}</span></b><small>${c.desc}</small></span>${catInstalled(c.id)?'<span class="ci-on">已安装</span>':'<span class="ci-add" aria-hidden="true">+</span>'}</button>`).join('')
-        : `<p class="hint" style="grid-column:1/-1">没有找到“${esc(CAT_UI.q)}”。可以在“自定义 MCP”或“自定义 CLI”里自己添加。</p>`}</div>`;
+      <div class="cat-grid" id="cat-grid">${list.length ? list.map(c=>`<button class="cat-item" data-cat="${c.id}">${catIc(c)}
+          <span class="ci-t"><b>${c.name}</b><small>${c.desc}</small></span>${catInstalled(c.id)?'<span class="ci-on" title="已安装">✓</span>':'<span class="ci-add" aria-hidden="true">+</span>'}</button>`).join('')
+        : `<p class="hint" style="grid-column:1/-1">没有找到“${esc(CAT_UI.q)}”。可以点右上角“创建”，添加自定义 MCP 或 CLI 连接器。</p>`}</div>`;
   } else if(CAT_UI.tab==='mcp'){
     body = `<div class="cat-form">
       <label><span>名称</span><input class="txt" value="内部知识库" style="font-family:var(--sans)"></label>
@@ -1585,19 +1646,22 @@ commands:
   "*":              { kind: write }</textarea>
       <div style="display:flex;gap:10px;align-items:center"><button class="btn sm" data-act="cat-file">选择文件…</button><span class="hint" style="margin:0">下一步会校验清单并以 diff 展示新增的权限</span></div></div>`;
   }
-  m.innerHTML = `<div class="modal-h"><h3>添加连接器</h3><div class="sp"></div><button class="icbtn" data-act="close" aria-label="关闭">×</button></div>
-    <div class="cat-tabs">${tabs.map(([k,n])=>`<button class="${CAT_UI.tab===k?'on':''}" data-cattab="${k}">${n}</button>`).join('')}</div>
+  const title = {catalog:'连接器', mcp:'创建：自定义 MCP', cli:'创建：自定义 CLI'}[CAT_UI.tab];
+  m.innerHTML = `<div class="modal-h">${CAT_UI.tab!=='catalog'?'<button class="icbtn" data-cattab="catalog" aria-label="返回目录">←</button>':''}<h3>${title}</h3><div class="sp"></div>
+      ${CAT_UI.tab==='catalog'?`<button class="btn sm" data-goto-settings="connectors" data-act="close">管理连接器</button>
+      <div style="position:relative"><button class="btn sm" data-act="cat-menu" aria-haspopup="menu" aria-expanded="${CAT_UI.menu}">创建 ▾</button>
+        ${CAT_UI.menu?`<div class="cat-menu" role="menu"><button role="menuitem" data-cattab="mcp"><b>自定义 MCP</b><small>远程 HTTP 或本地 stdio 服务</small></button><button role="menuitem" data-cattab="cli"><b>自定义 CLI</b><small>粘贴或导入连接器清单</small></button></div>`:''}</div>`:''}
+      <button class="icbtn" data-act="close" aria-label="关闭">×</button></div>
     <div class="modal-b">${body}</div>
-    ${CAT_UI.tab==='catalog' ? '<div class="modal-f" style="justify-content:space-between"><span class="hint" style="margin:0">目录里的连接器都附带审核过的清单；找不到的可以自定义添加</span><button class="btn" data-act="close">完成</button></div>'
-      : `<div class="modal-f"><button class="btn" data-act="close">取消</button><button class="btn primary" data-act="cat-next">${CAT_UI.tab==='mcp'?'连接并列出工具':'校验清单'}</button></div>`}`;
+    ${CAT_UI.tab==='catalog' ? '' : `<div class="modal-f"><button class="btn" data-cattab="catalog">返回</button><button class="btn primary" data-act="cat-next">${CAT_UI.tab==='mcp'?'连接并列出工具':'校验清单'}</button></div>`}`;
 }
 function catInstall(id){
   const c = CATALOG.find(x=>x.id===id); if(catInstalled(id)) return;
   CONNS.push({id, type:c.type, name:c.name+(c.bin?' '+c.bin:''), on:false, ver:c.type==='CLI'?`${c.bin}（已检测到）`:c.auth, cmds:`读 ${c.read.split(' · ').length} · 写 ${c.write==='无'?0:c.write.split(' · ').length}`,
     ids:[['user','未授权','wait']], granted:[], missing:c.scopes.includes(',')||c.scopes.includes(':')?c.scopes.split(/,\s*/).map(sc=>({scope:sc,layer:'user',as:'user',for:'安装后首次授权'})):[]});
   CONN_IC[id] = [c.ab, c.bg]; CONN_USE[id] = false;
-  closeModal(); if(route()==='settings') render(); connPopRefresh();
-  toast(`已安装 ${c.name}：默认未启用，完成授权后打开开关即可使用`);
+  if(route()==='settings') render(); connPopRefresh(); catRender();
+  toast(`已安装 ${c.name}：接下来完成授权`);
 }
 
 /* ================= 任务 ================= */
@@ -1780,7 +1844,7 @@ document.addEventListener('click', e => {
   else if(d.z!==undefined){ gApi?.zoomBy(+d.z); }
   else if(d.rk){ state.reportKind=d.rk; render(); }
   else if(d.st){ state.settingsTab=d.st; render(); }
-  else if(d.gotoSettings){ state.settingsTab=d.gotoSettings; location.hash='settings'; }
+  else if(d.gotoSettings){ closeModal(); state.settingsTab=d.gotoSettings; if(route()==='settings') render(); else location.hash='settings'; }
   else if(d.wt){ AG.tab=d.wt; AG.follow = true; renderAgPanel(); }
   else if(d.evId){ const ev = AG.events.find(x=>x.id===+d.evId); AG.follow=false; agOpenTab(ev, true); if(AG.ws==='off') AG.ws='open'; agRender(); }
   else if(d.sg!==undefined){ const i=+d.sg; AG.open.has(i)?AG.open.delete(i):AG.open.add(i); agRender(); }
@@ -1790,9 +1854,9 @@ document.addEventListener('click', e => {
   else if(d.exec){ state.exec=d.exec; render(); toast(d.exec==='host'?'已切换为本机直接执行：请谨慎':'已切换回 Docker 沙箱'); }
   else if(d.agv){ AG.view = d.agv; document.querySelectorAll('.a-task').forEach(b=>b.classList.toggle('cur', b===t)); agRender(); if(AG.view==='live') $('#ag-thread').scrollTop = 1e9; }
   else if(d.openTask){ AG.view = d.openTask; location.hash = 'agent'; }
-  else if(d.cat){ CAT_UI.sel = d.cat; catRender(); }
+  else if(d.cat){ CAT_UI.sel = d.cat; CAT_UI.menu = false; catRender(); $('.modal .modal-b').scrollTop = 0; }
   else if(d.catf){ CAT_UI.f = d.catf; catRender(); }
-  else if(d.cattab){ CAT_UI.tab = d.cattab; CAT_UI.sel = null; catRender(); }
+  else if(d.cattab){ CAT_UI.tab = d.cattab; CAT_UI.sel = null; CAT_UI.menu = false; catRender(); }
   else if(t.closest('.cat-form .seg') && !d.act){ t.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b===t)); }
   else if(t.closest('.cat-tools .seg')){ t.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b===t)); }
   else if(d.obsm){ state.obs.mode = d.obsm; render(); }
@@ -1852,6 +1916,12 @@ function act(a, t, d){
       toast(`原型：打开 obsidian://open?vault=Notes&file=${encodeURIComponent(file)}`); break; }
     case 'obs-sync': t.textContent='同步中…'; setTimeout(()=>{ state.obs.last='刚刚'; render(); toast('已同步：更新 3 篇，新增 1 篇，删除 0 篇'); }, 700); break;
     case 'cat-back': CAT_UI.sel=null; catRender(); break;
+    case 'cat-menu': CAT_UI.menu=!CAT_UI.menu; catRender(); break;
+    case 'cat-auth': { const c = CONNS.find(x=>x.id===d.c); c.ids=[['user','已授权','ok']]; c.granted.push(...c.missing.map(m=>m.scope)); c.missing=[]; c.on=true; CONN_USE[c.id]=true;
+      if(route()==='settings') render(); connPopRefresh(); catRender(); toast(`已授权并启用 ${c.name}（原型：实际会跳转到授权页）`); break; }
+    case 'cat-try': closeModal(); state.agPrefill = d.x; location.hash='agent'; setTimeout(()=>{ const ta=$('#ag-input'); if(ta){ ta.value=d.x; ta.focus(); } }, 50); toast('已把示例提示词填入 Agent 输入框'); break;
+    case 'cat-link': toast('原型：会在浏览器中打开'); break;
+    case 'cat-manifest': { const c = CATALOG.find(x=>x.id===d.c); toast(`原型：查看 ${c.name} 的清单`); break; }
     case 'cat-install': catInstall(d.c); break;
     case 'cat-file': toast('原型：会打开文件选择器，读取 .yaml 清单'); break;
     case 'cat-next': if(CAT_UI.tab==='mcp'){ $('.modal .modal-b').innerHTML = `<p class="hint" style="margin:0">已连接“内部知识库”，发现 4 个工具。请确认哪些是只读的：</p>
